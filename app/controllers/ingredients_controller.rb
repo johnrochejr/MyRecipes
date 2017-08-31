@@ -1,26 +1,8 @@
 class IngredientsController < ApplicationController
-  # GET /ingredients
-  def index
-    @recipe = Recipe.find(params[:recipe_id])
-    @ingredients = @recipe.ingredients
-  end
-
-  # GET /ingredients/1
-  def show
-    @recipe = Recipe.find(params[:recipe_id])
-    @ingredient = @recipe.ingredients.find(params[:id])
-  end
-
   # GET /ingredients/new
   def new
     @recipe = Recipe.find(params[:recipe_id])
     @ingredient = @recipe.ingredients.new
-  end
-
-  # GET /ingredients/1/edit
-  def edit
-    @recipe = Recipe.find(params[:recipe_id])
-    @ingredient = @recipe.ingredients.find(params[:id])
   end
 
   # POST /ingredients
@@ -29,29 +11,10 @@ class IngredientsController < ApplicationController
     @ingredient = @recipe.ingredients.new(ingredient_params)
 
     if @ingredient.save
-      redirect_to @ingredient, notice: 'Ingredient was successfully sauced.'
+      redirect_to @recipe, notice: 'Ingredient was successfully sauced.'
     else
       render :new
     end
-  end
-
-  # PATCH/PUT /ingredients/1
-  def update
-    @recipe = Recipe.find(params[:recipe_id])
-    @ingredient = @recipe.ingredients.find(params[:id])
-    if @ingredient.update(ingredient_params)
-      redirect_to @ingredient, notice: 'Ingredient just got saucier.'
-    else
-      render :edit
-    end
-  end
-
-  # DELETE /ingredients/1
-  def destroy
-    @recipe = Recipe.find(params[:recipe_id])
-    @ingredient = @recipe.ingredients.find(params[:id])
-    @ingredient.destroy
-    redirect_to ingredients_url, notice: 'Ingredient was successfully desauced.'
   end
 
   private
