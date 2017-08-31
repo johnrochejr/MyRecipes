@@ -1,30 +1,35 @@
 class IngredientsController < ApplicationController
   # GET /ingredients
   def index
-    @ingredients = Ingredient.all
+    @recipe = Recipe.find(params[:recipe_id])
+    @ingredients = @recipe.ingredients
   end
 
   # GET /ingredients/1
   def show
-    @ingredient = Ingredient.find(params[:id])
+    @recipe = Recipe.find(params[:recipe_id])
+    @ingredient = @recipe.ingredients.find(params[:id])
   end
 
   # GET /ingredients/new
   def new
-    @ingredient = Ingredient.new
+    @recipe = Recipe.find(params[:recipe_id])
+    @ingredient = @recipe.ingredients.new
   end
 
   # GET /ingredients/1/edit
   def edit
-    @ingredient = Ingredient.find(params[:id])
+    @recipe = Recipe.find(params[:recipe_id])
+    @ingredient = @recipe.ingredients.find(params[:id])
   end
 
   # POST /ingredients
   def create
-    @ingredient = Ingredient.new(ingredient_params)
+    @recipe = Recipe.find(params[:recipe_id])
+    @ingredient = @recipe.ingredients.new(ingredient_params)
 
     if @ingredient.save
-      redirect_to @ingredient, notice: 'Ingredient was successfully created.'
+      redirect_to @ingredient, notice: 'Ingredient was successfully sauced.'
     else
       render :new
     end
@@ -32,9 +37,10 @@ class IngredientsController < ApplicationController
 
   # PATCH/PUT /ingredients/1
   def update
-    @ingredient = Ingredient.find(params[:id])
+    @recipe = Recipe.find(params[:recipe_id])
+    @ingredient = @recipe.ingredients.find(params[:id])
     if @ingredient.update(ingredient_params)
-      redirect_to @ingredient, notice: 'Ingredient was successfully updated.'
+      redirect_to @ingredient, notice: 'Ingredient just got saucier.'
     else
       render :edit
     end
@@ -42,15 +48,16 @@ class IngredientsController < ApplicationController
 
   # DELETE /ingredients/1
   def destroy
-    @ingredient = Ingredient.find(params[:id])
+    @recipe = Recipe.find(params[:recipe_id])
+    @ingredient = @recipe.ingredients.find(params[:id])
     @ingredient.destroy
-    redirect_to ingredients_url, notice: 'Ingredient was successfully destroyed.'
+    redirect_to ingredients_url, notice: 'Ingredient was successfully desauced.'
   end
 
   private
 
   # Only allow a trusted parameter "white list" through.
   def ingredient_params
-    params.require(:ingredient).permit(:Item, :Prep, :recipe_id)
+    params.require(:ingredient).permit(:Item, :Prep)
   end
 end
