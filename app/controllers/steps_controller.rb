@@ -1,27 +1,32 @@
 class StepsController < ApplicationController
   # GET /steps
   def index
-    @steps = Step.all
+    @recipe = Recipe.find(params[:recipe_id])
+    @steps = @recipe.steps
   end
 
   # GET /steps/1
   def show
-    @step = Step.find(params[:id])
+    @recipe = Recipe.find(params[:recipe_id])
+    @step = @recipe.steps.find(params[:id])
   end
 
   # GET /steps/new
   def new
-    @step = Step.new
+    @recipe = Recipe.find(params[:recipe_id])
+    @step = @recipe.steps.new
   end
 
   # GET /steps/1/edit
   def edit
-    @step = Step.find(params[:id])
+    @recipe = Recipe.find(params[:recipe_id])
+    @step = @recipe.steps.find(params[:id])
   end
 
   # POST /steps
   def create
-    @step = Step.new(step_params)
+    @recipe = Recipe.find(params[:recipe_id])
+    @step = @recipe.steps.new(step_params)
 
     if @step.save
       redirect_to @step, notice: 'Step was successfully created.'
@@ -32,7 +37,8 @@ class StepsController < ApplicationController
 
   # PATCH/PUT /steps/1
   def update
-    @step = Step.find(params[:id])
+    @recipe = Recipe.find(params[:recipe_id])
+    @step = @recipe.steps.find(params[:id])
     if @step.update(step_params)
       redirect_to @step, notice: 'Step was successfully updated.'
     else
@@ -42,7 +48,8 @@ class StepsController < ApplicationController
 
   # DELETE /steps/1
   def destroy
-    @step = Step.find(params[:id])
+    @recipe = Recipe.find(params[:recipe_id])
+    @step = @recipe.steps.find(params[:id])
     @step.destroy
     redirect_to steps_url, notice: 'Step was successfully destroyed.'
   end
@@ -51,6 +58,6 @@ class StepsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def step_params
-    params.require(:step).permit(:instruction, :recipe_id)
+    params.require(:step).permit(:instruction)
   end
 end
