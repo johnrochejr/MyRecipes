@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170831201334) do
+ActiveRecord::Schema.define(version: 20170904113341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "files", force: :cascade do |t|
+    t.binary "content"
+    t.text "metadata"
+  end
 
   create_table "ingredients", force: :cascade do |t|
     t.string "Item"
@@ -39,6 +44,7 @@ ActiveRecord::Schema.define(version: 20170831201334) do
     t.date "Date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "image_data"
   end
 
   create_table "steps", force: :cascade do |t|
