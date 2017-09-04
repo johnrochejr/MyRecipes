@@ -1,3 +1,3 @@
 class ImageUploader < Shrine
-  include ImageUploader[:image]
+  #uploading logic
 end

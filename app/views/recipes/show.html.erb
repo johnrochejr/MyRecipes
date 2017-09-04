@@ -22,6 +22,10 @@
 
 </dl>
 
+<div class="show-image">
+  <%= image_tag(@recipe.image_url) %>
+</div>
+
 <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading">Ingredients</div>
@@ -41,9 +45,6 @@
             </ul>
           </div>
         <% end %>
-
-        <!-- Image-upoader  -->
-        <!-- <%= image_tag(@item.image_url) %> -->
 
         <%# Item %>
         <div class="form-group">

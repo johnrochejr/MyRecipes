@@ -1,6 +1,5 @@
 class Recipe < ApplicationRecord
-
-  includes ImageUploader[:image]
+  include ImageUploader[:image]
 
   has_many :ingredients
   has_many :steps
